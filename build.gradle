@@ -1,0 +1,62 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTargetWithTests
+
+plugins {
+    id 'org.jetbrains.kotlin.multiplatform' version '1.4.10'
+}
+
+group = 'com.kofero'
+version = '0.0.001-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+kotlin {
+    jvm{
+        compilations.all {
+            kotlinOptions.jvmTarget = '1.8'
+        }
+        testRuns["test"].executionTask.configure {
+            useJUnit()
+        }
+    }
+    ios("ios"){
+        binaries {
+            framework {
+                baseName = "Demo"
+            }
+        }
+    }
+
+    
+    sourceSets {
+        commonMain {
+            dependencies{
+                //api 'com.kofero:model-jvm:0.0.001-SNAPSHOT'
+            }
+        }
+        jvmMain {
+            dependencies{
+                commonMain
+            }
+        }
+        jvmTest {
+            dependencies {
+                commonMain
+                implementation kotlin('test-junit')
+            }
+        }
+        nativeMain {
+            dependencies{
+                commonMain
+            }
+        }
+        iosX64Main{
+
+        }
+        iosArm64Main{
+
+        }
+    }
+}
