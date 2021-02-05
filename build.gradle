@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.kofero'
-version = '0.0.001-SNAPSHOT'
+version = '0.0.003'
 
 repositories {
     mavenCentral()
@@ -33,7 +33,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies{
-                //api 'com.kofero:model-jvm:0.0.001-SNAPSHOT'
+                implementation 'com.kofero:model:0.0.003'
             }
         }
         jvmMain {
@@ -53,10 +53,14 @@ kotlin {
             }
         }
         iosX64Main{
-
+            dependencies{
+                commonMain
+            }
         }
         iosArm64Main{
-
+            dependencies {
+                commonMain
+            }
         }
     }
 }
