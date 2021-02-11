@@ -2,6 +2,14 @@ package com.kofero.presenter
 
 import com.kofero.model.Character
 
-class HomePresenter(val char:Character): IHomePresenter {
+class HomePresenter(): IHomePresenter {
+
+    override fun setView(view: IHomeView) {
+
+    }
+
+    override fun shutdown() {
+
+    }
 
 }

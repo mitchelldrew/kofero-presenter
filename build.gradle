@@ -1,11 +1,14 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTargetWithTests
+import org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask
 
 plugins {
     id 'org.jetbrains.kotlin.multiplatform' version '1.4.10'
+    id 'maven-publish'
 }
 
 group = 'com.kofero'
 version = '0.0.003'
+def frameworkName = 'presenter'
 
 repositories {
     mavenCentral()
@@ -21,14 +24,17 @@ kotlin {
             useJUnit()
         }
     }
-    ios("ios"){
-        binaries {
-            framework {
-                baseName = "Demo"
+    ios("ios")
+
+    targets {
+        iosArm64("iosArm")
+        iosX64("iosX64")
+        configure([iosArm,iosX64]) {
+            binaries.framework {
+                baseName = frameworkName
             }
         }
     }
-
     
     sourceSets {
         commonMain {
@@ -63,4 +69,22 @@ kotlin {
             }
         }
     }
+
+
+    task debugFatFramework(type: FatFrameworkTask){
+        baseName = frameworkName
+        destinationDir = file("$buildDir/fat-framework/debug")
+        from(
+                targets.iosArm.binaries.getFramework("DEBUG"),
+                targets.iosX64.binaries.getFramework("DEBUG")
+        )
+    }
+
+    task uploadPod(type: Exec){
+        commandLine 'sh'
+        args = ["uploadPod.sh", version]
+    }
+    uploadPod.dependsOn(debugFatFramework)
+    debugFatFramework.dependsOn(build)
 }
+
