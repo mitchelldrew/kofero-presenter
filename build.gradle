@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.kofero'
-version = '0.0.003'
+version = '0.0.008'
 def frameworkName = 'presenter'
 
 repositories {
@@ -31,6 +31,7 @@ kotlin {
         iosX64("iosX64")
         configure([iosArm,iosX64]) {
             binaries.framework {
+                embedBitcode("bitcode")
                 baseName = frameworkName
             }
         }
@@ -39,7 +40,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies{
-                implementation 'com.kofero:model:0.0.003'
+                implementation 'com.kofero:model:0.0.004'
             }
         }
         jvmMain {

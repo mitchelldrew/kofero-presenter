@@ -1,6 +1,6 @@
-package com.kofero.presenter
+package ro.kofe.presenter
 
-import com.kofero.model.Character
+import ro.kofe.model.Character
 
 class HomePresenter(): IHomePresenter {
 
