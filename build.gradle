@@ -6,8 +6,8 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'com.kofero'
-version = '0.0.008'
+group = 'ro.kofe'
+version = '0.0.009'
 def frameworkName = 'presenter'
 
 repositories {
@@ -40,7 +40,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies{
-                implementation 'com.kofero:model:0.0.004'
+                implementation 'ro.kofe:model:0.0.005'
             }
         }
         jvmMain {
