@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'ro.kofe'
-version = '0.0.009'
+version = '0.0.010'
 def frameworkName = 'presenter'
 
 repositories {
@@ -27,9 +27,10 @@ kotlin {
     ios("ios")
 
     targets {
-        iosArm64("iosArm")
+        iosArm64("iosA64")
+        iosArm32("iosA32")
         iosX64("iosX64")
-        configure([iosArm,iosX64]) {
+        configure([iosA32,iosX64,iosA64]) {
             binaries.framework {
                 embedBitcode("bitcode")
                 baseName = frameworkName
@@ -40,7 +41,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies{
-                implementation 'ro.kofe:model:0.0.005'
+                implementation 'ro.kofe:model:0.0.010'
             }
         }
         jvmMain {
@@ -76,7 +77,8 @@ kotlin {
         baseName = frameworkName
         destinationDir = file("$buildDir/fat-framework/debug")
         from(
-                targets.iosArm.binaries.getFramework("DEBUG"),
+                targets.iosA32.binaries.getFramework("DEBUG"),
+                targets.iosA64.binaries.getFramework("DEBUG"),
                 targets.iosX64.binaries.getFramework("DEBUG")
         )
     }
