@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'ro.kofe'
-version = '0.0.010'
+version = '0.0.012'
 def frameworkName = 'presenter'
 
 repositories {
@@ -73,12 +73,19 @@ kotlin {
     }
 
 
+    task releaseFramework(type: FatFrameworkTask){
+        baseName = frameworkName
+        destinationDir = file("$buildDir/fat-framework/release")
+        from(
+                targets.iosA32.binaries.getFramework("DEBUG"),
+                targets.iosA64.binaries.getFramework("DEBUG")
+        )
+    }
+
     task debugFatFramework(type: FatFrameworkTask){
         baseName = frameworkName
         destinationDir = file("$buildDir/fat-framework/debug")
         from(
-                targets.iosA32.binaries.getFramework("DEBUG"),
-                targets.iosA64.binaries.getFramework("DEBUG"),
                 targets.iosX64.binaries.getFramework("DEBUG")
         )
     }
@@ -87,7 +94,9 @@ kotlin {
         commandLine 'sh'
         args = ["uploadPod.sh", version]
     }
+
     uploadPod.dependsOn(debugFatFramework)
     debugFatFramework.dependsOn(build)
+
 }
 
