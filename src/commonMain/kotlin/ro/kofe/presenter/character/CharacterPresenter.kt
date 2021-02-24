@@ -14,12 +14,20 @@ class CharacterPresenter(private val moveProvider:IMoveProvider, private val ima
             override fun onReceive(url: String, imgBase64: String) {
 
             }
+
+            override fun onError(url: String, error: Exception) {
+
+            }
         }
     }
 
     private fun getMoveListener(): IMoveProvider.Listener {
         return object : IMoveProvider.Listener {
             override fun onReceive(id: Int, move: Move) {
+
+            }
+
+            override fun onError(error: Exception) {
 
             }
         }

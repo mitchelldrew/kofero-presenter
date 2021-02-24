@@ -7,5 +7,6 @@ interface IImageProvider {
 
     interface Listener{
         fun onReceive(url:String, imgBase64:String)
+        fun onError(url:String, error:Exception)
     }
 }

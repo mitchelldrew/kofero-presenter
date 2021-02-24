@@ -9,5 +9,6 @@ interface ICharacterProvider {
 
     interface Listener{
         fun onReceive(id:Int, char:Character)
+        fun onError(id:Int, Error:Exception)
     }
 }

@@ -6,4 +6,5 @@ import ro.kofe.model.Move
 interface ICharacterView {
     fun display(character:Character)
     fun display(moves:List<Move>)
+    fun error(error:Exception)
 }

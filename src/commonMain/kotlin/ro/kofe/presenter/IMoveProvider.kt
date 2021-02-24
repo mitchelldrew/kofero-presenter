@@ -9,5 +9,6 @@ interface IMoveProvider {
 
     interface Listener{
         fun onReceive(id:Int, move:Move)
+        fun onError(error:Exception)
     }
 }

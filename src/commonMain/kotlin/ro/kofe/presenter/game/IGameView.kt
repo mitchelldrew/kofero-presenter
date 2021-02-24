@@ -6,4 +6,5 @@ import ro.kofe.model.Game
 interface IGameView {
     fun display(game:Game)
     fun display(characters:List<Character>)
+    fun error(error:Exception)
 }

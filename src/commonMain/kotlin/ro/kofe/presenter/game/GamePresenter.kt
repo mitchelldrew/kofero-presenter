@@ -12,15 +12,15 @@ class GamePresenter(private val characterProvider: ICharacterProvider, private v
 
     private fun getCharacterListener(): ICharacterProvider.Listener {
         return object : ICharacterProvider.Listener {
-            override fun onReceive(id: Int, char: Character) {
-            }
+            override fun onReceive(id: Int, char: Character) {}
+            override fun onError(id: Int, Error: Exception) {}
         }
     }
 
     private fun getImageListener(): IImageProvider.Listener {
         return object : IImageProvider.Listener {
-            override fun onReceive(url: String, imgBase64: String) {
-            }
+            override fun onReceive(url: String, imgBase64: String) {}
+            override fun onError(url: String, error: Exception) {}
         }
     }
 
@@ -36,11 +36,12 @@ class GamePresenter(private val characterProvider: ICharacterProvider, private v
         attachListeners()
     }
 
-    override fun show(id: Int) {
-        TODO("Not yet implemented")
+    override fun showGames() {
+    }
+
+    override fun showGame(id: Int) {
     }
 
     override fun shutdown() {
-        TODO("Not yet implemented")
     }
 }
