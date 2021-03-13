@@ -1,7 +1,7 @@
 package ro.kofe.presenter
 
 interface IImageProvider {
-    fun get(url:String,save:Boolean)
+    fun get(url:String)
     fun addListener(imgListener:Listener)
     fun removeListener(imgListener:Listener)
 

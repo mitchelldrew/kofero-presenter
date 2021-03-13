@@ -36,9 +36,6 @@ class GamePresenter(private val characterProvider: ICharacterProvider, private v
         attachListeners()
     }
 
-    override fun showGames() {
-    }
-
     override fun showGame(id: Int) {
     }
 

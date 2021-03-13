@@ -31,7 +31,7 @@ class HomePresenter(private var gameProvider: IGameProvider?, private var imageP
         return object : IGameProvider.Listener {
             override fun onReceive(games: List<Game>) { view?.display(games) }
             override fun onReceive(id: Int, game: Game) {}
-            override fun onError(error: Exception) {
+            override fun onError(id:Int, error: Exception) {
 
             }
         }
@@ -42,7 +42,7 @@ class HomePresenter(private var gameProvider: IGameProvider?, private var imageP
         attachListeners()
     }
 
-    override fun show() {
+    override fun showGames() {
         gameProvider?.get()
     }
 

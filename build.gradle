@@ -41,7 +41,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies{
-                implementation 'ro.kofe:model:0.0.013'
+                implementation 'ro.kofe:model:0.0.017'
             }
         }
         jvmMain {

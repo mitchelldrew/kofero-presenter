@@ -2,11 +2,11 @@ package ro.kofe.presenter.character
 
 import ro.kofe.model.Move
 import ro.kofe.presenter.IImageProvider
-import ro.kofe.presenter.IMoveProvider
+import ro.kofe.presenter.move.IMoveProvider
 
-class CharacterPresenter(private val moveProvider:IMoveProvider, private val imageProvider:IImageProvider): ICharacterPresenter {
+class CharacterPresenter(private val moveProvider: IMoveProvider, private val imageProvider:IImageProvider): ICharacterPresenter {
     private var view:ICharacterView? = null
-    private var moveListener:IMoveProvider.Listener? = null
+    private var moveListener: IMoveProvider.Listener? = null
     private var imageListener:IImageProvider.Listener? = null
 
     private fun getImageListener(): IImageProvider.Listener {

@@ -11,6 +11,6 @@ interface IGameProvider {
     interface Listener {
         fun onReceive(games:List<Game>)
         fun onReceive(id:Int, game:Game)
-        fun onError(error:Exception)
+        fun onError(id:Int, error:Exception)
     }
 }
