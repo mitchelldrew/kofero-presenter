@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'ro.kofe'
-version = '0.0.014'
+version = '0.0.017'
 def frameworkName = 'presenter'
 
 repositories {

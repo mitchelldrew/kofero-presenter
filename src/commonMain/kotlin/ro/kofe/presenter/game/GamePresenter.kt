@@ -4,8 +4,9 @@ import ro.kofe.model.Character
 import ro.kofe.presenter.IImageProvider
 import ro.kofe.presenter.character.ICharacterProvider
 
-class GamePresenter(private val characterProvider: ICharacterProvider, private val imageProvider:IImageProvider): IGamePresenter {
+class GamePresenter(private val characterProvider: ICharacterProvider, private val gameProvider: IGameProvider, private val imageProvider:IImageProvider): IGamePresenter {
     private var view:IGameView? = null
+    private var gameListener:IGameProvider.Listener? = null
     private var characterListener:ICharacterProvider.Listener? = null
     private var imageListener:IImageProvider.Listener? = null
 
