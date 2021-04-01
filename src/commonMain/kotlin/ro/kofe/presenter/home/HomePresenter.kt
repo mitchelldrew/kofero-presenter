@@ -2,12 +2,13 @@ package ro.kofe.presenter.home
 
 import ro.kofe.model.Game
 import ro.kofe.presenter.IImageProvider
-import ro.kofe.presenter.game.IGameProvider
+import ro.kofe.presenter.IProvider
+import ro.kofe.presenter.IProviderListener
 
 
-class HomePresenter(private var gameProvider: IGameProvider?, private var imageProvider:IImageProvider?): IHomePresenter {
+class HomePresenter(private var gameProvider: IProvider<Game>?, private var imageProvider:IImageProvider?): IHomePresenter {
     private var view: IHomeView? = null
-    private var gameListener: IGameProvider.Listener? = null
+    private var gameListener: IProviderListener<Game>? = null
     private var imageListener: IImageProvider.Listener? = null
 
 
@@ -27,13 +28,10 @@ class HomePresenter(private var gameProvider: IGameProvider?, private var imageP
         }
     }
 
-    private fun getGameListener(): IGameProvider.Listener {
-        return object : IGameProvider.Listener {
-            override fun onReceive(games: List<Game>) { view?.display(games) }
-            override fun onReceive(id: Int, game: Game) {}
-            override fun onError(id:Int, error: Exception) {
-
-            }
+    private fun getGameListener(): IProviderListener<Game> {
+        return object : IProviderListener<Game> {
+            override fun onReceive(ids: List<Int>, elements: List<Game>) {}
+            override fun onError(ids: List<Int>, error: Exception) {}
         }
     }
 
@@ -43,7 +41,7 @@ class HomePresenter(private var gameProvider: IGameProvider?, private var imageP
     }
 
     override fun showGames() {
-        gameProvider?.get()
+        gameProvider?.get(ArrayList())
     }
 
     override fun shutdown() {

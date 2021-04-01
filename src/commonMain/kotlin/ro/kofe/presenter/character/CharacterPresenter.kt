@@ -2,11 +2,12 @@ package ro.kofe.presenter.character
 
 import ro.kofe.model.Move
 import ro.kofe.presenter.IImageProvider
-import ro.kofe.presenter.move.IMoveProvider
+import ro.kofe.presenter.IProvider
+import ro.kofe.presenter.IProviderListener
 
-class CharacterPresenter(private val moveProvider: IMoveProvider, private val imageProvider:IImageProvider): ICharacterPresenter {
+class CharacterPresenter(private val moveProvider: IProvider<Move>, private val imageProvider:IImageProvider): ICharacterPresenter {
     private var view:ICharacterView? = null
-    private var moveListener: IMoveProvider.Listener? = null
+    private var moveListener: IProviderListener<Move>? = null
     private var imageListener:IImageProvider.Listener? = null
 
     private fun getImageListener(): IImageProvider.Listener {
@@ -21,15 +22,10 @@ class CharacterPresenter(private val moveProvider: IMoveProvider, private val im
         }
     }
 
-    private fun getMoveListener(): IMoveProvider.Listener {
-        return object : IMoveProvider.Listener {
-            override fun onReceive(id: Int, move: Move) {
-
-            }
-
-            override fun onError(error: Exception) {
-
-            }
+    private fun getMoveListener(): IProviderListener<Move> {
+        return object : IProviderListener<Move> {
+            override fun onReceive(ids: List<Int>, elements: List<Move>) {}
+            override fun onError(ids: List<Int>, error: Exception) {}
         }
     }
 

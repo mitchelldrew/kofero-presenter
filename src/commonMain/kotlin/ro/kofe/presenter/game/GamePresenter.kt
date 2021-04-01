@@ -1,20 +1,22 @@
 package ro.kofe.presenter.game
 
 import ro.kofe.model.Character
+import ro.kofe.model.Game
 import ro.kofe.presenter.IImageProvider
-import ro.kofe.presenter.character.ICharacterProvider
+import ro.kofe.presenter.IProvider
+import ro.kofe.presenter.IProviderListener
 
-class GamePresenter(private val characterProvider: ICharacterProvider, private val gameProvider: IGameProvider, private val imageProvider:IImageProvider): IGamePresenter {
+class GamePresenter(private val characterProvider: IProvider<Character>, private val gameProvider: IProvider<Game>, private val imageProvider:IImageProvider): IGamePresenter {
     private var view:IGameView? = null
-    private var gameListener:IGameProvider.Listener? = null
-    private var characterListener:ICharacterProvider.Listener? = null
+    private var gameListener:IProviderListener<Game>? = null
+    private var characterListener:IProviderListener<Character>? = null
     private var imageListener:IImageProvider.Listener? = null
 
 
-    private fun getCharacterListener(): ICharacterProvider.Listener {
-        return object : ICharacterProvider.Listener {
-            override fun onReceive(id: Int, char: Character) {}
-            override fun onError(id: Int, Error: Exception) {}
+    private fun getCharacterListener(): IProviderListener<Character> {
+        return object : IProviderListener<Character>{
+            override fun onReceive(ids: List<Int>, elements: List<Character>) {}
+            override fun onError(ids: List<Int>, error: Exception) {}
         }
     }
 
