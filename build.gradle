@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'ro.kofe'
-version = '0.0.017'
+version = '0.0.021'
 def frameworkName = 'presenter'
 
 repositories {
@@ -41,7 +41,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies{
-                implementation 'ro.kofe:model:0.0.017'
+                implementation 'ro.kofe:model:0.0.021'
             }
         }
         jvmMain {
