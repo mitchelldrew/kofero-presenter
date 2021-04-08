@@ -11,13 +11,16 @@ class RootPresenter(private val gameProvider: IProvider<Game>): IRootPresenter {
     private fun getGameListener(): IProviderListener<Game> {
         return object : IProviderListener<Game> {
             override fun onReceive(ids: List<Int>, elements: List<Game>) {
-                print("#########")
-                print(elements)
+                println("#########")
+                for(element in elements){
+                    println(element.toString())
+                }
+                println("%%%%%%%%%")
                 view?.error(Exception(elements.toString()))
             }
 
             override fun onError(ids: List<Int>, error: Exception) {
-                print("@@@@@@@@@")
+                println("@@@@@@@@@")
             }
 
         }
