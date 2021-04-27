@@ -2,25 +2,19 @@ package ro.kofe.presenter.root
 
 import ro.kofe.presenter.IProvider
 import ro.kofe.model.Game
+import ro.kofe.presenter.IFreezer
 import ro.kofe.presenter.IProviderListener
 
-class RootPresenter(private val gameProvider: IProvider<Game>): IRootPresenter {
+class RootPresenter(private val freezer:IFreezer, private val gameProvider: IProvider<Game>): IRootPresenter {
     private var view:IRootView? = null
     private var listener: IProviderListener<Game>? = null
 
     private fun getGameListener(): IProviderListener<Game> {
         return object : IProviderListener<Game> {
             override fun onReceive(ids: List<Int>, elements: List<Game>) {
-                println("#########")
-                for(element in elements){
-                    println(element.toString())
-                }
-                println("%%%%%%%%%")
-                view?.error(Exception(elements.toString()))
             }
 
             override fun onError(ids: List<Int>, error: Exception) {
-                println("@@@@@@@@@")
             }
 
         }
@@ -28,10 +22,9 @@ class RootPresenter(private val gameProvider: IProvider<Game>): IRootPresenter {
 
     override fun setView(rootView: IRootView) {
         this.view = rootView
-        view?.error(Exception("hello world"))
         listener = getGameListener()
+        freezer.freeze(listener!!)
         gameProvider.addListener(listener!!)
-        gameProvider.get(ArrayList<Int>().apply { add(1);add(2)})
     }
 
     override fun shutdown() {
