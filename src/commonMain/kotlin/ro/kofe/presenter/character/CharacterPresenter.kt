@@ -1,39 +1,67 @@
 package ro.kofe.presenter.character
 
 import ro.kofe.model.Move
+import ro.kofe.model.Character
+import ro.kofe.presenter.IFreezer
 import ro.kofe.presenter.IImageProvider
 import ro.kofe.presenter.IProvider
 import ro.kofe.presenter.IProviderListener
 
-class CharacterPresenter(private val moveProvider: IProvider<Move>, private val imageProvider:IImageProvider): ICharacterPresenter {
+class CharacterPresenter(private val freezer:IFreezer?, private val charProvider: IProvider<Character>?, private val moveProvider: IProvider<Move>?, private val imageProvider:IImageProvider?): ICharacterPresenter {
     private var view:ICharacterView? = null
     private var moveListener: IProviderListener<Move>? = null
     private var imageListener:IImageProvider.Listener? = null
+    private var charListener:IProviderListener<Character>? = null
 
     private fun getImageListener(): IImageProvider.Listener {
         return object : IImageProvider.Listener {
             override fun onReceive(url: String, imgBase64: String) {
-
+                view?.display(url,imgBase64)
             }
-
             override fun onError(url: String, error: Exception) {
-
+                view?.error(error)
             }
         }
     }
 
     private fun getMoveListener(): IProviderListener<Move> {
         return object : IProviderListener<Move> {
-            override fun onReceive(ids: List<Int>, elements: List<Move>) {}
-            override fun onError(ids: List<Int>, error: Exception) {}
+            override fun onReceive(ids: List<Int>, elements: List<Move>) {
+                freezer?.freeze(elements)
+                view?.display(elements)
+            }
+            override fun onError(ids: List<Int>, error: Exception) {
+                view?.error(error)
+            }
+        }
+    }
+
+    private fun getCharListener(): IProviderListener<Character> {
+        return object : IProviderListener<Character>{
+            override fun onReceive(ids: List<Int>, elements: List<Character>) {
+                freezer?.freeze(elements)
+                for(char in elements){
+                    freezer?.freeze(char)
+                    imageProvider?.get(char.iconUrl)
+                    moveProvider?.get(char.moveIds)
+                }
+            }
+            override fun onError(ids: List<Int>, error: Exception) {
+                view?.error(error)
+            }
         }
     }
 
     private fun attachListeners(){
         imageListener = getImageListener()
         moveListener = getMoveListener()
-        imageProvider.addListener(imageListener!!)
-        moveProvider.addListener(moveListener!!)
+        charListener = getCharListener()
+        freezer?.freeze(imageListener!!)
+        freezer?.freeze(moveListener!!)
+        freezer?.freeze(charListener!!)
+        imageProvider?.addListener(imageListener!!)
+        moveProvider?.addListener(moveListener!!)
+        charProvider?.addListener(charListener!!)
     }
 
     override fun setView(view: ICharacterView) {
@@ -42,5 +70,8 @@ class CharacterPresenter(private val moveProvider: IProvider<Move>, private val 
     }
 
     override fun get(id: Int) {
+        var list = ArrayList<Int>()
+        list.add(id)
+        charProvider?.get(list)
     }
 }

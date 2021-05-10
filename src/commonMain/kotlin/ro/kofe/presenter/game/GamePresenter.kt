@@ -33,6 +33,7 @@ class GamePresenter(private var freezer: IFreezer?, private var characterProvide
                 freezer?.freeze(elements)
                 view?.display(elements)
                 for(char in elements){
+                    freezer?.freeze(char)
                     imageProvider?.get(char.iconUrl)
                 }
             }
@@ -45,6 +46,8 @@ class GamePresenter(private var freezer: IFreezer?, private var characterProvide
     private fun getImageListener(): IImageProvider.Listener {
         return object : IImageProvider.Listener {
             override fun onReceive(url: String, imgBase64: String) {
+                freezer?.freeze(url)
+                freezer?.freeze(imgBase64)
                 view?.display(url,imgBase64)
             }
             override fun onError(url: String, error: Exception) {
@@ -84,5 +87,6 @@ class GamePresenter(private var freezer: IFreezer?, private var characterProvide
         gameProvider = null
         imageProvider = null
         characterProvider = null
+        freezer = null
     }
 }

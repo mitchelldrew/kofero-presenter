@@ -1,25 +1,39 @@
 package ro.kofe.presenter.home
 
 import ro.kofe.model.Game
-import ro.kofe.presenter.IFreezer
-import ro.kofe.presenter.IImageProvider
-import ro.kofe.presenter.IProvider
-import ro.kofe.presenter.IProviderListener
+import ro.kofe.model.Obj
+import ro.kofe.presenter.*
 
 
-class HomePresenter(private val freezer:IFreezer, private var gameProvider: IProvider<Game>?, private var imageProvider:IImageProvider?): IHomePresenter {
+class HomePresenter(private val freezer:IFreezer, private var gameProvider: IProvider<Game>?, private var imageProvider:IImageProvider?, private var favoritesProvider:IFavoritesProvider?): IHomePresenter {
     private var view: IHomeView? = null
     private var gameListener: IProviderListener<Game>? = null
     private var imageListener: IImageProvider.Listener? = null
+    private var favoritesListener: IProviderListener<Obj>? = null
 
 
     private fun attachListeners(){
         gameListener = getGameListener()
         imageListener = getImageListener()
+        favoritesListener = getFavoritesListener()
+        freezer.freeze(favoritesListener!!)
         freezer.freeze(gameListener!!)
         freezer.freeze(imageListener!!)
         gameProvider?.addListener(gameListener!!)
         imageProvider?.addListener(imageListener!!)
+        favoritesProvider?.addListener(favoritesListener!!)
+    }
+
+    private fun getFavoritesListener(): IProviderListener<Obj> {
+        return object : IProviderListener<Obj> {
+            override fun onReceive(ids: List<Int>, elements: List<Obj>) {
+                view?.display(favorites = elements)
+            }
+
+            override fun onError(ids: List<Int>, error: Exception) {
+                view?.error(error)
+            }
+        }
     }
 
     private fun getImageListener(): IImageProvider.Listener {
@@ -38,7 +52,7 @@ class HomePresenter(private val freezer:IFreezer, private var gameProvider: IPro
                     freezer.freeze(game)
                     imageProvider?.get(game.iconUrl)
                 }
-                view?.display(elements) }
+                view?.display(games = elements) }
             override fun onError(ids: List<Int>, error: Exception) { view?.error(error) }
         }
     }
