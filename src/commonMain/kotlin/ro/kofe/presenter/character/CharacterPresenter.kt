@@ -44,6 +44,7 @@ class CharacterPresenter(private val freezer:IFreezer?, private val charProvider
                     freezer?.freeze(char)
                     imageProvider?.get(char.iconUrl)
                     moveProvider?.get(char.moveIds)
+                    view?.display(char)
                 }
             }
             override fun onError(ids: List<Int>, error: Exception) {
