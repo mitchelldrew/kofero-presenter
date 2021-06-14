@@ -34,7 +34,8 @@ class GamePresenter(private var freezer: IFreezer?, private var characterProvide
                 view?.display(elements)
                 for(char in elements){
                     freezer?.freeze(char)
-                    imageProvider?.get(char.iconUrl)
+                    val iconUrl = char.iconUrl + ""
+                    imageProvider?.get(iconUrl)
                 }
             }
             override fun onError(ids: List<Int>, error: Exception) {
