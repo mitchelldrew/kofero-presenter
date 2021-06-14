@@ -19,7 +19,7 @@ class GamePresenter(private var freezer: IFreezer?, private var characterProvide
             override fun onReceive(ids: List<Int>, elements: List<Game>) {
                 freezer?.freeze(elements)
                 view?.display(elements[0])
-                characterProvider?.get(elements[0].characterIds)
+                characterProvider?.get(elements[0].charIds)
             }
             override fun onError(ids: List<Int>, error: Exception) {
                 view?.error(error)
@@ -31,11 +31,12 @@ class GamePresenter(private var freezer: IFreezer?, private var characterProvide
         return object : IProviderListener<Character>{
             override fun onReceive(ids: List<Int>, elements: List<Character>) {
                 freezer?.freeze(elements)
+                for(char in elements){ freezer?.freeze(char) }
                 view?.display(elements)
                 for(char in elements){
-                    freezer?.freeze(char)
-                    val iconUrl = char.iconUrl + ""
-                    imageProvider?.get(iconUrl)
+                    val url = char.copy().iconUrl
+                    freezer?.freeze(url)
+                    imageProvider?.get(char.copy().iconUrl)
                 }
             }
             override fun onError(ids: List<Int>, error: Exception) {
