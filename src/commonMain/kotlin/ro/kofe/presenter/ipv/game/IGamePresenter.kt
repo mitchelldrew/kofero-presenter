@@ -1,7 +1,7 @@
 package ro.kofe.presenter.ipv.game
 
-interface IGamePresenter {
-    fun setView(view:IGameView)
+import ro.kofe.presenter.ipv.IPresenter
+
+interface IGamePresenter: IPresenter<IGameView> {
     fun showGame(id:Int)
-    fun shutdown()
 }

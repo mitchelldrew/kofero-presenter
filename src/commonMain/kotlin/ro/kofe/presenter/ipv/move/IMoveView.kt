@@ -1,4 +1,6 @@
 package ro.kofe.presenter.ipv.move
 
-interface IMoveView {
+import ro.kofe.presenter.ipv.IView
+
+interface IMoveView: IView {
 }

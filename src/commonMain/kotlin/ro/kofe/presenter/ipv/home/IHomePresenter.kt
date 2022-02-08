@@ -1,7 +1,7 @@
 package ro.kofe.presenter.ipv.home
 
-interface IHomePresenter {
-    fun setView(view: IHomeView)
+import ro.kofe.presenter.ipv.IPresenter
+
+interface IHomePresenter: IPresenter<IHomeView> {
     fun showGames()
-    fun shutdown()
 }

@@ -7,7 +7,12 @@ import ro.kofe.presenter.provider.IImageProvider
 import ro.kofe.presenter.provider.IProvider
 import ro.kofe.presenter.provider.IProviderListener
 
-class CharacterPresenter(private val freezer:IFreezer?, private val charProvider: IProvider<Character>?, private val moveProvider: IProvider<Move>?, private val imageProvider: IImageProvider?): ICharacterPresenter {
+class CharacterPresenter(
+    private val freezer:IFreezer?,
+    private val charProvider: IProvider<Character>?,
+    private val moveProvider: IProvider<Move>?,
+    private val imageProvider: IImageProvider?
+    ): ICharacterPresenter {
     private var view:ICharacterView? = null
     private var moveListener: IProviderListener<Move>? = null
     private var imageListener: IImageProvider.Listener? = null
@@ -74,5 +79,9 @@ class CharacterPresenter(private val freezer:IFreezer?, private val charProvider
         var list = ArrayList<Int>()
         list.add(id)
         charProvider?.get(list)
+    }
+
+    override fun shutdown() {
+        error("TODO")
     }
 }

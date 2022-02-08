@@ -1,6 +1,5 @@
 package ro.kofe.presenter.ipv.root
 
-interface IRootPresenter {
-    fun setView(rootView:IRootView)
-    fun shutdown()
-}
+import ro.kofe.presenter.ipv.IPresenter
+
+interface IRootPresenter: IPresenter<IRootView> {}

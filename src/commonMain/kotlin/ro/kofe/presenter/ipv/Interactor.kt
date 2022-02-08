@@ -2,6 +2,7 @@ package ro.kofe.presenter.ipv
 
 import ro.kofe.model.logging.Level.DEBUG
 import ro.kofe.model.state.Event
+import ro.kofe.presenter.IRouter
 import ro.kofe.presenter.millisNow
 import ro.kofe.presenter.provider.ILoggingProvider
 import ro.kofe.presenter.state.IStateLogger
@@ -11,6 +12,7 @@ abstract class Interactor<V: IView, P: IPresenter<V>>(
     internal var presenter: P?,
     internal var stateLogger: IStateLogger?,
     internal var stateReducer: IStateReducer?,
+    internal var router: IRouter?,
     loggingProvider: ILoggingProvider?,
     logTag:String
 ): KoferoObj(loggingProvider,logTag), IInteractor<V> {

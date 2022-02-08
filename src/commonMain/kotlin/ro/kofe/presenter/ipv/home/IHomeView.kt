@@ -2,10 +2,10 @@ package ro.kofe.presenter.ipv.home
 
 import ro.kofe.model.Game
 import ro.kofe.model.Obj
+import ro.kofe.presenter.ipv.IView
 
-interface IHomeView {
+interface IHomeView: IView {
     fun displayGames(games:List<Game>)
     fun displayFavs(favorites:List<Obj>)
     fun display(url:String, imgBase64:String)
-    fun error(error:Exception)
 }

@@ -1,5 +1,5 @@
 package ro.kofe.presenter.ipv.root
 
-interface IRootView {
-    fun error(error:Exception)
-}
+import ro.kofe.presenter.ipv.IView
+
+interface IRootView: IView {}

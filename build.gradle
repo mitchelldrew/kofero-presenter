@@ -62,7 +62,6 @@ kotlin {
         }
     }
 
-
     task releaseFatFramework(type: FatFrameworkTask){
         baseName = frameworkName
         destinationDir = file("$buildDir/fat-framework/release")

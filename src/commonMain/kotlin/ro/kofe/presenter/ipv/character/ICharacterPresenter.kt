@@ -1,6 +1,7 @@
 package ro.kofe.presenter.ipv.character
 
-interface ICharacterPresenter {
-    fun setView(view:ICharacterView)
+import ro.kofe.presenter.ipv.IPresenter
+
+interface ICharacterPresenter: IPresenter<ICharacterView> {
     fun get(id:Int)
 }
