@@ -27,10 +27,10 @@ kotlin {
     ios("ios")
 
     targets {
-        iosArm64("iosA64")
-        iosArm32("iosA32")
+        iosArm64("iosArm64")
+        iosArm32("iosArm32")
         iosX64("iosX64")
-        configure([iosA32,iosX64,iosA64]) {
+        configure([iosArm32,iosX64,iosArm64]) {
             binaries.framework {
                 embedBitcode("bitcode")
                 baseName = frameworkName
@@ -67,8 +67,8 @@ kotlin {
         baseName = frameworkName
         destinationDir = file("$buildDir/fat-framework/release")
         from(
-                targets.iosA32.binaries.getFramework("DEBUG"),
-                targets.iosA64.binaries.getFramework("DEBUG")
+                targets.iosArm32.binaries.getFramework("DEBUG"),
+                targets.iosArm64.binaries.getFramework("DEBUG")
         )
     }
 
