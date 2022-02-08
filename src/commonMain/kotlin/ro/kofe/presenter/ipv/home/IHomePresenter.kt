@@ -1,4 +1,4 @@
-package ro.kofe.presenter.home
+package ro.kofe.presenter.ipv.home
 
 interface IHomePresenter {
     fun setView(view: IHomeView)

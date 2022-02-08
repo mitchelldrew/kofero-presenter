@@ -1,9 +1,9 @@
-package ro.kofe.presenter.root
+package ro.kofe.presenter.ipv.root
 
-import ro.kofe.presenter.IProvider
+import ro.kofe.presenter.provider.IProvider
 import ro.kofe.model.Game
 import ro.kofe.presenter.IFreezer
-import ro.kofe.presenter.IProviderListener
+import ro.kofe.presenter.provider.IProviderListener
 
 class RootPresenter(private val freezer:IFreezer, private val gameProvider: IProvider<Game>): IRootPresenter {
     private var view:IRootView? = null

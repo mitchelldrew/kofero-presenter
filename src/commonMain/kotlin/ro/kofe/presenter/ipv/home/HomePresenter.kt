@@ -1,11 +1,15 @@
-package ro.kofe.presenter.home
+package ro.kofe.presenter.ipv.home
 
 import ro.kofe.model.Game
 import ro.kofe.model.Obj
 import ro.kofe.presenter.*
+import ro.kofe.presenter.provider.IFavoritesProvider
+import ro.kofe.presenter.provider.IImageProvider
+import ro.kofe.presenter.provider.IProvider
+import ro.kofe.presenter.provider.IProviderListener
 
 
-class HomePresenter(private val freezer:IFreezer, private var gameProvider: IProvider<Game>?, private var imageProvider:IImageProvider?, private var favoritesProvider:IFavoritesProvider?): IHomePresenter {
+class HomePresenter(private val freezer:IFreezer, private var gameProvider: IProvider<Game>?, private var imageProvider: IImageProvider?, private var favoritesProvider: IFavoritesProvider?): IHomePresenter {
     private var view: IHomeView? = null
     private var gameListener: IProviderListener<Game>? = null
     private var imageListener: IImageProvider.Listener? = null
@@ -27,7 +31,7 @@ class HomePresenter(private val freezer:IFreezer, private var gameProvider: IPro
     private fun getFavoritesListener(): IProviderListener<Obj> {
         return object : IProviderListener<Obj> {
             override fun onReceive(ids: List<Int>, elements: List<Obj>) {
-                view?.display(favorites = elements)
+                view?.displayFavs(favorites = elements)
             }
 
             override fun onError(ids: List<Int>, error: Exception) {
@@ -52,7 +56,7 @@ class HomePresenter(private val freezer:IFreezer, private var gameProvider: IPro
                     freezer.freeze(game)
                     imageProvider?.get(game.iconUrl)
                 }
-                view?.display(games = elements) }
+                view?.displayGames(games = elements) }
             override fun onError(ids: List<Int>, error: Exception) { view?.error(error) }
         }
     }

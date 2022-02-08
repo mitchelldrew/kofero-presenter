@@ -1,4 +1,4 @@
-package ro.kofe.presenter.character
+package ro.kofe.presenter.ipv.character
 
 interface ICharacterPresenter {
     fun setView(view:ICharacterView)

@@ -1,4 +1,4 @@
-package ro.kofe.presenter
+package ro.kofe.presenter.provider
 
 import ro.kofe.model.Obj
 

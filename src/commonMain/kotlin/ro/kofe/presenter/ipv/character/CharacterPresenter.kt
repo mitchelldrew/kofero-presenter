@@ -1,17 +1,17 @@
-package ro.kofe.presenter.character
+package ro.kofe.presenter.ipv.character
 
 import ro.kofe.model.Move
 import ro.kofe.model.Character
 import ro.kofe.presenter.IFreezer
-import ro.kofe.presenter.IImageProvider
-import ro.kofe.presenter.IProvider
-import ro.kofe.presenter.IProviderListener
+import ro.kofe.presenter.provider.IImageProvider
+import ro.kofe.presenter.provider.IProvider
+import ro.kofe.presenter.provider.IProviderListener
 
-class CharacterPresenter(private val freezer:IFreezer?, private val charProvider: IProvider<Character>?, private val moveProvider: IProvider<Move>?, private val imageProvider:IImageProvider?): ICharacterPresenter {
+class CharacterPresenter(private val freezer:IFreezer?, private val charProvider: IProvider<Character>?, private val moveProvider: IProvider<Move>?, private val imageProvider: IImageProvider?): ICharacterPresenter {
     private var view:ICharacterView? = null
     private var moveListener: IProviderListener<Move>? = null
-    private var imageListener:IImageProvider.Listener? = null
-    private var charListener:IProviderListener<Character>? = null
+    private var imageListener: IImageProvider.Listener? = null
+    private var charListener: IProviderListener<Character>? = null
 
     private fun getImageListener(): IImageProvider.Listener {
         return object : IImageProvider.Listener {
@@ -37,7 +37,7 @@ class CharacterPresenter(private val freezer:IFreezer?, private val charProvider
     }
 
     private fun getCharListener(): IProviderListener<Character> {
-        return object : IProviderListener<Character>{
+        return object : IProviderListener<Character> {
             override fun onReceive(ids: List<Int>, elements: List<Character>) {
                 freezer?.freeze(elements)
                 for(char in elements){

@@ -1,4 +1,4 @@
-package ro.kofe.presenter.game
+package ro.kofe.presenter.ipv.game
 
 import ro.kofe.model.Character
 import ro.kofe.model.Game

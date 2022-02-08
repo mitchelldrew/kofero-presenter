@@ -1,20 +1,20 @@
-package ro.kofe.presenter.game
+package ro.kofe.presenter.ipv.game
 
 import ro.kofe.model.Character
 import ro.kofe.model.Game
 import ro.kofe.presenter.IFreezer
-import ro.kofe.presenter.IImageProvider
-import ro.kofe.presenter.IProvider
-import ro.kofe.presenter.IProviderListener
+import ro.kofe.presenter.provider.IImageProvider
+import ro.kofe.presenter.provider.IProvider
+import ro.kofe.presenter.provider.IProviderListener
 
-class GamePresenter(private var freezer: IFreezer?, private var characterProvider: IProvider<Character>?, private var gameProvider: IProvider<Game>?, private var imageProvider:IImageProvider?): IGamePresenter {
+class GamePresenter(private var freezer: IFreezer?, private var characterProvider: IProvider<Character>?, private var gameProvider: IProvider<Game>?, private var imageProvider: IImageProvider?): IGamePresenter {
     private var view:IGameView? = null
-    private var gameListener:IProviderListener<Game>? = null
-    private var characterListener:IProviderListener<Character>? = null
-    private var imageListener:IImageProvider.Listener? = null
+    private var gameListener: IProviderListener<Game>? = null
+    private var characterListener: IProviderListener<Character>? = null
+    private var imageListener: IImageProvider.Listener? = null
 
 
-    private fun getGameListener(): IProviderListener<Game>{
+    private fun getGameListener(): IProviderListener<Game> {
         return object : IProviderListener<Game> {
             override fun onReceive(ids: List<Int>, elements: List<Game>) {
                 freezer?.freeze(elements)
@@ -28,7 +28,7 @@ class GamePresenter(private var freezer: IFreezer?, private var characterProvide
     }
 
     private fun getCharacterListener(): IProviderListener<Character> {
-        return object : IProviderListener<Character>{
+        return object : IProviderListener<Character> {
             override fun onReceive(ids: List<Int>, elements: List<Character>) {
                 freezer?.freeze(elements)
                 for(char in elements){ freezer?.freeze(char) }

@@ -1,4 +1,4 @@
-package ro.kofe.presenter.character
+package ro.kofe.presenter.ipv.character
 
 import ro.kofe.model.Character
 import ro.kofe.model.Move

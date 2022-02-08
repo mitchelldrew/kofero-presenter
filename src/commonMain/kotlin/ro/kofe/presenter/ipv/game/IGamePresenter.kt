@@ -1,4 +1,4 @@
-package ro.kofe.presenter.game
+package ro.kofe.presenter.ipv.game
 
 interface IGamePresenter {
     fun setView(view:IGameView)
