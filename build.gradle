@@ -2,12 +2,12 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTargetWithTests
 import org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask
 
 plugins {
-    id 'org.jetbrains.kotlin.multiplatform' version '1.5.10'
+    id 'org.jetbrains.kotlin.multiplatform' version '1.6.10'
     id 'maven-publish'
 }
 
 group = 'ro.kofe'
-version = '0.0.032'
+version = '0.0.036'
 def frameworkName = 'presenter'
 
 repositories {
@@ -41,7 +41,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies{
-                implementation 'ro.kofe:model:0.0.033'
+                implementation 'ro.kofe:model:0.0.036'
+                implementation "com.soywiz.korlibs.klock:klock:2.4.13"
             }
         }
         jvmMain {

@@ -1,6 +1,6 @@
 package ro.kofe.presenter.state
 
-import ro.kofe.model.state.Event
+import ro.kofe.model.Event
 
 interface IStateRepository {
     fun get()

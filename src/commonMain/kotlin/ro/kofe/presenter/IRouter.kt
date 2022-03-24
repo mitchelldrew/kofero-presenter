@@ -1,7 +1,7 @@
 package ro.kofe.presenter
 
-import ro.kofe.model.state.ViewTag
+import ro.kofe.model.Event
 
 interface IRouter {
-    fun routeTo(view:ViewTag): Boolean
+    fun routeTo(view: Event.ViewTag, uid:Int): Boolean
 }
