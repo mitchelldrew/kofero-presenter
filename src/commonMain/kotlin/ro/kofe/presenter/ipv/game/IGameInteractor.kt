@@ -5,4 +5,5 @@ import ro.kofe.presenter.ipv.IInteractor
 
 interface IGameInteractor: IInteractor<IGameView> {
     fun charPressed(char: Character)
+    fun setGameUid(uid:Int)
 }
